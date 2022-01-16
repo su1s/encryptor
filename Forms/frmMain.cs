@@ -59,14 +59,13 @@ namespace Encryptor
         private void EncodeShellcode()
         {
             // Encode in desired format 
-            byte[] iv = new byte[16];
-            Array.Copy(System.Text.Encoding.ASCII.GetBytes(Properties.Settings.Default.AES_IV), 0, iv, 0, Properties.Settings.Default.AES_IV.Length);
-            byte[] key = new byte[32];
-            Array.Copy(System.Text.Encoding.ASCII.GetBytes(Properties.Settings.Default.AES_Key), 0, key, 0, Properties.Settings.Default.AES_Key.Length);
-
             switch (Properties.Settings.Default.Method)
             {
                 case "AES":
+                    byte[] iv = new byte[16];
+                    Array.Copy(System.Text.Encoding.ASCII.GetBytes(Properties.Settings.Default.AES_IV), 0, iv, 0, Properties.Settings.Default.AES_IV.Length);
+                    byte[] key = new byte[32];
+                    Array.Copy(System.Text.Encoding.ASCII.GetBytes(Properties.Settings.Default.AES_Key), 0, key, 0, Properties.Settings.Default.AES_Key.Length);
                     EncodedShellcode = Functions.EncryptAES(RawShellcode, key, iv);
                     Encoding_Method = "AES";
                     Encoding_Type = "Encrypted";
