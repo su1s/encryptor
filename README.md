@@ -1,6 +1,6 @@
 # Encryptor
 
-Window shellcode helper utility. Reads and encodes/encrypts shellcode in various methods to avoid signature detections. Also has various output formats.
+Window shellcode helper utility. Reads and encodes/encrypts binary files (shellcode) in various methods to avoid signature detections. Outputs encoded files and byte array definitions in various formats. 
 
 ## Encoding / Encryption methods 
 
