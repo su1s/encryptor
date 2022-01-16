@@ -1,0 +1,51 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Encryptor.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Format" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C#</Value>
+    </Setting>
+    <Setting Name="Method" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AES</Value>
+    </Setting>
+    <Setting Name="Caesar_Shift" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="XOR_Key" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ABCDEFGH</Value>
+    </Setting>
+    <Setting Name="SplitLine" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">22</Value>
+    </Setting>
+    <Setting Name="AES_IV" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0000000000000000</Value>
+    </Setting>
+    <Setting Name="AES_Key" Type="System.String" Scope="User">
+      <Value Profile="(Default)">00000000000000000000000000000000</Value>
+    </Setting>
+    <Setting Name="Tabs" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="Split_base64" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Xanax_XOR1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A</Value>
+    </Setting>
+    <Setting Name="Xanax_XOR2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">B</Value>
+    </Setting>
+    <Setting Name="Xanax_Add1" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="Xanax_Add2" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="Insertion_String" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ABCDEFG</Value>
+    </Setting>
+    <Setting Name="Insertion_Freq" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
