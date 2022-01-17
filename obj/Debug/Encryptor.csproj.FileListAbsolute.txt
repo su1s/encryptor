@@ -1,0 +1,10 @@
+Z:\Code\Encryptor\Encryptor\bin\Debug\Encryptor.exe.config
+Z:\Code\Encryptor\Encryptor\bin\Debug\Encryptor.exe
+Z:\Code\Encryptor\Encryptor\bin\Debug\Encryptor.pdb
+Z:\Code\Encryptor\Encryptor\obj\Debug\Encryptor.csprojAssemblyReference.cache
+Z:\Code\Encryptor\Encryptor\obj\Debug\Encryptor.frmMain.resources
+Z:\Code\Encryptor\Encryptor\obj\Debug\Encryptor.frmOptions.resources
+Z:\Code\Encryptor\Encryptor\obj\Debug\Encryptor.csproj.GenerateResource.cache
+Z:\Code\Encryptor\Encryptor\obj\Debug\Encryptor.csproj.CoreCompileInputs.cache
+Z:\Code\Encryptor\Encryptor\obj\Debug\Encryptor.exe
+Z:\Code\Encryptor\Encryptor\obj\Debug\Encryptor.pdb

@@ -61,7 +61,7 @@ namespace Encryptor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ABCDEFGH")]
+        [global::System.Configuration.DefaultSettingValueAttribute("QUJDREVGR0g=")]
         public string XOR_Key {
             get {
                 return ((string)(this["XOR_Key"]));
@@ -85,7 +85,7 @@ namespace Encryptor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0000000000000000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("MDAwMDAwMDAwMDAwMDAwMA==")]
         public string AES_IV {
             get {
                 return ((string)(this["AES_IV"]));
@@ -97,7 +97,7 @@ namespace Encryptor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("00000000000000000000000000000000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("MTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMTE=")]
         public string AES_Key {
             get {
                 return ((string)(this["AES_Key"]));
@@ -181,7 +181,7 @@ namespace Encryptor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ABCDEFG")]
+        [global::System.Configuration.DefaultSettingValueAttribute("QUJDREVGR0g=")]
         public string Insertion_String {
             get {
                 return ((string)(this["Insertion_String"]));

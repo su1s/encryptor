@@ -35,6 +35,7 @@ namespace Encryptor
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDownSplitLines = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnGenerateXOR = new System.Windows.Forms.Button();
             this.tbXOR = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.numericUpDownCaesar = new System.Windows.Forms.NumericUpDown();
@@ -177,6 +178,7 @@ namespace Encryptor
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.btnGenerateXOR);
             this.groupBox4.Controls.Add(this.tbXOR);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 3);
@@ -188,14 +190,25 @@ namespace Encryptor
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "XOR Key";
             // 
+            // btnGenerateXOR
+            // 
+            this.btnGenerateXOR.Location = new System.Drawing.Point(210, 42);
+            this.btnGenerateXOR.Name = "btnGenerateXOR";
+            this.btnGenerateXOR.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerateXOR.TabIndex = 3;
+            this.btnGenerateXOR.Text = "Generate";
+            this.btnGenerateXOR.UseVisualStyleBackColor = true;
+            this.btnGenerateXOR.Click += new System.EventHandler(this.btnGenerateXOR_Click);
+            // 
             // tbXOR
             // 
             this.tbXOR.Location = new System.Drawing.Point(4, 17);
             this.tbXOR.Margin = new System.Windows.Forms.Padding(2);
             this.tbXOR.MaxLength = 255;
             this.tbXOR.Name = "tbXOR";
-            this.tbXOR.Size = new System.Drawing.Size(158, 20);
+            this.tbXOR.Size = new System.Drawing.Size(282, 20);
             this.tbXOR.TabIndex = 0;
+            this.tbXOR.Leave += new System.EventHandler(this.tbXOR_Leave);
             // 
             // groupBox5
             // 
@@ -283,6 +296,7 @@ namespace Encryptor
             this.tbKey.Name = "tbKey";
             this.tbKey.Size = new System.Drawing.Size(233, 20);
             this.tbKey.TabIndex = 1;
+            this.tbKey.Leave += new System.EventHandler(this.tbKey_Leave);
             // 
             // tbIV
             // 
@@ -291,6 +305,7 @@ namespace Encryptor
             this.tbIV.Name = "tbIV";
             this.tbIV.Size = new System.Drawing.Size(233, 20);
             this.tbIV.TabIndex = 0;
+            this.tbIV.Leave += new System.EventHandler(this.tbIV_Leave);
             // 
             // tabControl1
             // 
@@ -625,6 +640,7 @@ namespace Encryptor
             this.tbInsertionString.Name = "tbInsertionString";
             this.tbInsertionString.Size = new System.Drawing.Size(182, 20);
             this.tbInsertionString.TabIndex = 0;
+            this.tbInsertionString.Leave += new System.EventHandler(this.tbInsertionString_Leave);
             // 
             // btnCancel
             // 
@@ -743,5 +759,6 @@ namespace Encryptor
         private System.Windows.Forms.Button btnGenerateInsertionString;
         private System.Windows.Forms.NumericUpDown nudInsertionFreq;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnGenerateXOR;
     }
 }

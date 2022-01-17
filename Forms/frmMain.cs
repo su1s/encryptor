@@ -63,9 +63,11 @@ namespace Encryptor
             {
                 case "AES":
                     byte[] iv = new byte[16];
-                    Array.Copy(System.Text.Encoding.ASCII.GetBytes(Properties.Settings.Default.AES_IV), 0, iv, 0, Properties.Settings.Default.AES_IV.Length);
+                    byte[] ivBase64 = Convert.FromBase64String(Properties.Settings.Default.AES_IV);
+                    Array.Copy(ivBase64, 0, iv, 0, ivBase64.Length);
                     byte[] key = new byte[32];
-                    Array.Copy(System.Text.Encoding.ASCII.GetBytes(Properties.Settings.Default.AES_Key), 0, key, 0, Properties.Settings.Default.AES_Key.Length);
+                    byte[] keyBase64 = Convert.FromBase64String(Properties.Settings.Default.AES_IV);
+                    Array.Copy(keyBase64, 0, key, 0, keyBase64.Length);
                     EncodedShellcode = Functions.EncryptAES(RawShellcode, key, iv);
                     Encoding_Method = "AES";
                     Encoding_Type = "Encrypted";
@@ -76,7 +78,7 @@ namespace Encryptor
                     Encoding_Type = "Encoded";
                     break;
                 case "XOR":
-                    EncodedShellcode = Functions.xor(RawShellcode, Encoding.ASCII.GetBytes(Properties.Settings.Default.XOR_Key));
+                    EncodedShellcode = Functions.xor(RawShellcode, Convert.FromBase64String(Properties.Settings.Default.XOR_Key));
                     Encoding_Method = "XOR";
                     Encoding_Type = "Encoded";
                     break;
@@ -90,7 +92,7 @@ namespace Encryptor
                     Encoding_Type = "Encoded";
                     break;
                 case "Insertion":
-                    EncodedShellcode = Functions.EncodeInsertion(RawShellcode, Encoding.ASCII.GetBytes(Properties.Settings.Default.Insertion_String), Convert.ToInt32(Properties.Settings.Default.Insertion_Freq));
+                    EncodedShellcode = Functions.EncodeInsertion(RawShellcode, Convert.FromBase64String(Properties.Settings.Default.Insertion_String), Convert.ToInt32(Properties.Settings.Default.Insertion_Freq));
                     Encoding_Method = "Insertion";
                     Encoding_Type = "Encoded";
                     break;
@@ -183,15 +185,22 @@ namespace Encryptor
 
         private void DecodeShellcode()
         {
+            if (RawShellcode.Length == 0)
+            {
+                MessageBox.Show("Please load shellcode first", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             TempShellcode = EncodedShellcode;
             // Decode in desired format 
             switch (Properties.Settings.Default.Method)
             {
                 case "AES":
                     byte[] iv = new byte[16];
-                    Array.Copy(System.Text.Encoding.ASCII.GetBytes(Properties.Settings.Default.AES_IV), 0, iv, 0, Properties.Settings.Default.AES_IV.Length);
+                    byte[] ivBase64 = System.Convert.FromBase64String(Properties.Settings.Default.AES_IV);
+                    Array.Copy(ivBase64, 0, iv, 0, ivBase64.Length);
                     byte[] key = new byte[32];
-                    Array.Copy(System.Text.Encoding.ASCII.GetBytes(Properties.Settings.Default.AES_Key), 0, key, 0, Properties.Settings.Default.AES_Key.Length);
+                    byte[] keyBase64 = System.Convert.FromBase64String(Properties.Settings.Default.AES_IV);
+                    Array.Copy(keyBase64, 0, key, 0, keyBase64.Length);
                     EncodedShellcode = Functions.DecryptAES(TempShellcode, key, iv);
                     Encoding_Method = "AES";
                     Encoding_Type = "Decrypted";
@@ -202,7 +211,7 @@ namespace Encryptor
                     Encoding_Type = "Decoded";
                     break;
                 case "XOR":
-                    EncodedShellcode = Functions.xor(TempShellcode, Encoding.ASCII.GetBytes(Properties.Settings.Default.XOR_Key));
+                    EncodedShellcode = Functions.xor(TempShellcode, Convert.FromBase64String(Properties.Settings.Default.XOR_Key));
                     Encoding_Method = "XOR";
                     Encoding_Type = "Decoded";
                     break;
@@ -267,15 +276,16 @@ namespace Encryptor
                         sb.AppendLine("## " + Encoding_Method + " Settings");
                         sb.AppendLine();
                         byte[] iv = new byte[16];
-                        Array.Copy(System.Text.Encoding.ASCII.GetBytes(Properties.Settings.Default.AES_IV), 0, iv, 0, Properties.Settings.Default.AES_IV.Length);
+                        byte[] ivBase64 = System.Convert.FromBase64String(Properties.Settings.Default.AES_IV);
+                        Array.Copy(ivBase64, 0, iv, 0, ivBase64.Length);
                         byte[] key = new byte[32];
-                        Array.Copy(System.Text.Encoding.ASCII.GetBytes(Properties.Settings.Default.AES_Key), 0, key, 0, Properties.Settings.Default.AES_Key.Length);
-
+                        byte[] keyBase64 = System.Convert.FromBase64String(Properties.Settings.Default.AES_Key);
+                        Array.Copy(keyBase64, 0, key, 0, keyBase64.Length);
                         switch (Properties.Settings.Default.Method)
                         {
                             case "AES":
-                                sb.AppendLine("AES IV: " + Properties.Settings.Default.AES_IV);
-                                sb.AppendLine("AES Key: " + Properties.Settings.Default.AES_Key);
+                                sb.AppendLine("AES IV: " + System.Text.Encoding.UTF8.GetString(ivBase64));
+                                sb.AppendLine("AES Key: " + System.Text.Encoding.UTF8.GetString(keyBase64));
                                 sb.AppendLine("AES IV (Base64): " + Convert.ToBase64String(iv, 0, iv.Length, Base64FormattingOptions.None));
                                 sb.AppendLine("AES Key (Base64): " + Convert.ToBase64String(key, 0, key.Length, Base64FormattingOptions.None));
                                 sb.AppendLine("AES IV (C): " + PrintBytesC(iv, "iv").Replace(Environment.NewLine, "").Replace("\t", ""));
@@ -295,9 +305,9 @@ namespace Encryptor
                                 sb.AppendLine("Caesar Shift: " + Decimal.ToInt32(Properties.Settings.Default.Caesar_Shift).ToString());
                                 break;
                             case "XOR":
-                                byte[] xor = Encoding.ASCII.GetBytes(Properties.Settings.Default.XOR_Key);
-                                sb.AppendLine("XOR Key: " + Properties.Settings.Default.XOR_Key);
-                                sb.AppendLine("XOR Key (Base64): " + Convert.ToBase64String(xor, 0, xor.Length, Base64FormattingOptions.None));
+                                byte[] xor = Convert.FromBase64String(Properties.Settings.Default.XOR_Key);
+                                sb.AppendLine("XOR Key: " + System.Text.Encoding.UTF8.GetString(xor, 0, xor.Length));
+                                sb.AppendLine("XOR Key (Base64): " + Properties.Settings.Default.XOR_Key);
                                 sb.AppendLine("XOR Key (C): " + PrintBytesC(xor, "xor").Replace(Environment.NewLine, "").Replace("\t", ""));
                                 sb.AppendLine("XOR Key (C#): " + PrintBytesCSharp(xor, "xor").Replace(Environment.NewLine, "").Replace("\t", ""));
                                 sb.AppendLine("XOR Key (PowerShell): " + PrintBytesPowershell(xor, "xor").Replace(Environment.NewLine, "").Replace("\t", ""));
@@ -312,9 +322,9 @@ namespace Encryptor
                                 sb.AppendLine("Xanax Add2: " + Properties.Settings.Default.Xanax_Add2);
                                 break;
                             case "Insertion":
-                                byte[] InsertionBytes = Encoding.ASCII.GetBytes(Properties.Settings.Default.Insertion_String);
+                                byte[] InsertionBytes = Convert.FromBase64String(Properties.Settings.Default.Insertion_String);
                                 sb.AppendLine("Insertion Frequency: " + Decimal.ToInt32(Properties.Settings.Default.Insertion_Freq).ToString());
-                                sb.AppendLine("Insertion Key: " + Properties.Settings.Default.Insertion_String);
+                                sb.AppendLine("Insertion Key: " + System.Text.Encoding.UTF8.GetString(InsertionBytes, 0, InsertionBytes.Length));
                                 sb.AppendLine("Insertion Key (Base64): " + Convert.ToBase64String(InsertionBytes, 0, InsertionBytes.Length, Base64FormattingOptions.None));
                                 sb.AppendLine("Insertion Key (C): " + PrintBytesC(InsertionBytes, "InsertBytes").Replace(Environment.NewLine, "").Replace("\t", ""));
                                 sb.AppendLine("Insertion Key (C#): " + PrintBytesCSharp(InsertionBytes, "InsertBytes").Replace(Environment.NewLine, "").Replace("\t", ""));
@@ -327,7 +337,7 @@ namespace Encryptor
                                 MessageBox.Show("Unknown encoding method", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                         }
-                        File.WriteAllText(saveFileDialog1.FileName + ".Settings.txt", sb.ToString());
+                        File.WriteAllText(saveFileDialog1.FileName + "." + Display_Format + "-" + Encoding_Method + "-" + Encoding_Type + "-Settings.txt", sb.ToString());
                     }
                     catch (SecurityException ex)
                     {
@@ -358,7 +368,15 @@ namespace Encryptor
                 }
 
             }
-            sb.Remove(sb.Length - 2, 2);
+            if (counter == 0) // Need to reverse the newline stuff 
+            {
+                int ToRemove = (Decimal.ToInt32(Properties.Settings.Default.Tabs) + 4);
+                sb.Remove(sb.Length - ToRemove, ToRemove);
+            }
+            else
+            {
+                sb.Remove(sb.Length - 2, 2);
+            }
             sb.Append("};");
             return sb.ToString();
         }
@@ -378,6 +396,15 @@ namespace Encryptor
                 }
 
             }
+            if (counter == 0) // Need to reverse the newline stuff 
+            {
+                int ToRemove = (Decimal.ToInt32(Properties.Settings.Default.Tabs) + 4);
+                sb.Remove(sb.Length - ToRemove, ToRemove);
+            }
+            else
+            {
+                sb.Remove(sb.Length - 2, 2);
+            }
             sb.Append("\";");
             return sb.ToString();
         }
@@ -395,7 +422,15 @@ namespace Encryptor
                     sb.AppendFormat("_{0}", Environment.NewLine + String.Concat(Enumerable.Repeat("\t", Decimal.ToInt32(Properties.Settings.Default.Tabs))));
                 }
             }
-            sb.Remove(sb.Length - 2, 2);
+            if (counter % Properties.Settings.Default.SplitLine == 0) // Need to reverse the newline stuff 
+            {
+                int ToRemove = (Decimal.ToInt32(Properties.Settings.Default.Tabs) + 5);
+                sb.Remove(sb.Length - ToRemove, ToRemove);
+            }
+            else
+            {
+                sb.Remove(sb.Length - 2, 2);
+            }
             sb.Append(")");
             return sb.ToString();
         }
@@ -417,8 +452,14 @@ namespace Encryptor
                     sb.Append("&");
                 }
             }
-            sb.Remove(sb.Length - 1, 1);
-            //sb.Append(")");
+            if (counter % Properties.Settings.Default.SplitLine == 0) // Need to reverse the newline stuff 
+            {
+                sb.Remove(sb.Length - 7, 7);
+            }
+            else
+            {
+                sb.Remove(sb.Length - 1, 1);
+            }
             return sb.ToString();
         }
         // Print Bytes as Powershell definition 
@@ -435,7 +476,15 @@ namespace Encryptor
                     sb.Append(Environment.NewLine + String.Concat(Enumerable.Repeat("\t", Decimal.ToInt32(Properties.Settings.Default.Tabs))));
                 }
             }
-            sb.Remove(sb.Length - 2, 2);
+            if (counter % Properties.Settings.Default.SplitLine == 0) // Need to reverse the newline stuff 
+            {
+                int ToRemove = (Decimal.ToInt32(Properties.Settings.Default.Tabs) + 4);
+                sb.Remove(sb.Length - ToRemove, ToRemove);
+            }
+            else
+            {
+                sb.Remove(sb.Length - 2, 2);
+            }
             sb.Append(";");
             return sb.ToString();
         }
@@ -455,6 +504,10 @@ namespace Encryptor
                 }
             }
             sb.Append("\"");
+            if (counter % Properties.Settings.Default.SplitLine == 0) // Remove the new line stuff on last byte
+            {
+                sb.Remove(sb.Length - 10, 10);
+            }
             return sb.ToString();
         }
     }
