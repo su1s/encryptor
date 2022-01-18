@@ -144,8 +144,8 @@ namespace Encryptor
                     break;
                 case "Text":
                     Display_Format = "Text";
-                    tbRaw.Text = Encoding.ASCII.GetString(RawShellcode);
-                    tbEncoded.Text = Encoding.ASCII.GetString(EncodedShellcode);
+                    tbRaw.Text = Encoding.UTF8.GetString(RawShellcode);
+                    tbEncoded.Text = Encoding.UTF8.GetString(EncodedShellcode);
                     break;
                 default:
                     MessageBox.Show("Unknown format type:" + Properties.Settings.Default.Format, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -363,20 +363,13 @@ namespace Encryptor
                 counter++;
                 if (counter % Properties.Settings.Default.SplitLine == 0)
                 {
-                    sb.Append(Environment.NewLine + String.Concat(Enumerable.Repeat("\t", Decimal.ToInt32(Properties.Settings.Default.Tabs))));
-                    counter = 0;
+                    if (counter != byteArray.Length) // Only add new line if we aren't on the last byte 
+                    {
+                        sb.Append(Environment.NewLine + String.Concat(Enumerable.Repeat("\t", Decimal.ToInt32(Properties.Settings.Default.Tabs))));
+                    }
                 }
-
             }
-            if (counter == 0) // Need to reverse the newline stuff 
-            {
-                int ToRemove = (Decimal.ToInt32(Properties.Settings.Default.Tabs) + 4);
-                sb.Remove(sb.Length - ToRemove, ToRemove);
-            }
-            else
-            {
-                sb.Remove(sb.Length - 2, 2);
-            }
+            sb.Remove(sb.Length - 2, 2);
             sb.Append("};");
             return sb.ToString();
         }
@@ -391,19 +384,11 @@ namespace Encryptor
                 counter++;
                 if (counter % Properties.Settings.Default.SplitLine == 0)
                 {
-                    sb.Append("\"" + Environment.NewLine + String.Concat(Enumerable.Repeat("\t", Decimal.ToInt32(Properties.Settings.Default.Tabs))) + "\"");
-                    counter = 0;
+                    if (counter != byteArray.Length) // Only add new line if we aren't on the last byte 
+                    {
+                        sb.Append("\"" + Environment.NewLine + String.Concat(Enumerable.Repeat("\t", Decimal.ToInt32(Properties.Settings.Default.Tabs))) + "\"");
+                    }
                 }
-
-            }
-            if (counter == 0) // Need to reverse the newline stuff 
-            {
-                int ToRemove = (Decimal.ToInt32(Properties.Settings.Default.Tabs) + 4);
-                sb.Remove(sb.Length - ToRemove, ToRemove);
-            }
-            else
-            {
-                sb.Remove(sb.Length - 2, 2);
             }
             sb.Append("\";");
             return sb.ToString();
@@ -419,18 +404,13 @@ namespace Encryptor
                 counter++;
                 if (counter % Properties.Settings.Default.SplitLine == 0)
                 {
-                    sb.AppendFormat("_{0}", Environment.NewLine + String.Concat(Enumerable.Repeat("\t", Decimal.ToInt32(Properties.Settings.Default.Tabs))));
+                    if (counter != byteArray.Length) // Only add new line if we aren't on the last byte 
+                    {
+                        sb.AppendFormat("_{0}", Environment.NewLine + String.Concat(Enumerable.Repeat("\t", Decimal.ToInt32(Properties.Settings.Default.Tabs))));
+                    }
                 }
             }
-            if (counter % Properties.Settings.Default.SplitLine == 0) // Need to reverse the newline stuff 
-            {
-                int ToRemove = (Decimal.ToInt32(Properties.Settings.Default.Tabs) + 5);
-                sb.Remove(sb.Length - ToRemove, ToRemove);
-            }
-            else
-            {
-                sb.Remove(sb.Length - 2, 2);
-            }
+            sb.Remove(sb.Length - 2, 2);
             sb.Append(")");
             return sb.ToString();
         }
@@ -445,21 +425,21 @@ namespace Encryptor
                 counter++;
                 if (counter % Properties.Settings.Default.SplitLine == 0)
                 {
-                    sb.Append(Environment.NewLine + "sc=sc&");
+                    if (counter != byteArray.Length) // Only add new line if we aren't on the last byte 
+                    {
+                        sb.Append(Environment.NewLine + "sc=sc&");
+                    }
+                    else
+                    {
+                        sb.Append(" ");
+                    }
                 }
                 else
                 {
                     sb.Append("&");
                 }
             }
-            if (counter % Properties.Settings.Default.SplitLine == 0) // Need to reverse the newline stuff 
-            {
-                sb.Remove(sb.Length - 7, 7);
-            }
-            else
-            {
-                sb.Remove(sb.Length - 1, 1);
-            }
+            sb.Remove(sb.Length - 1, 1);
             return sb.ToString();
         }
         // Print Bytes as Powershell definition 
@@ -473,18 +453,13 @@ namespace Encryptor
                 counter++;
                 if (counter % Properties.Settings.Default.SplitLine == 0)
                 {
-                    sb.Append(Environment.NewLine + String.Concat(Enumerable.Repeat("\t", Decimal.ToInt32(Properties.Settings.Default.Tabs))));
+                    if (counter != byteArray.Length) // Only add new line if we aren't on the last byte 
+                    {
+                        sb.Append(Environment.NewLine + String.Concat(Enumerable.Repeat("\t", Decimal.ToInt32(Properties.Settings.Default.Tabs))));
+                    }
                 }
             }
-            if (counter % Properties.Settings.Default.SplitLine == 0) // Need to reverse the newline stuff 
-            {
-                int ToRemove = (Decimal.ToInt32(Properties.Settings.Default.Tabs) + 4);
-                sb.Remove(sb.Length - ToRemove, ToRemove);
-            }
-            else
-            {
-                sb.Remove(sb.Length - 2, 2);
-            }
+            sb.Remove(sb.Length - 2, 2);
             sb.Append(";");
             return sb.ToString();
         }
@@ -499,15 +474,14 @@ namespace Encryptor
                 counter++;
                 if (counter % Properties.Settings.Default.SplitLine == 0)
                 {
-                    sb.Append("\"" + Environment.NewLine + VariableName + " += b\"");
-                    counter = 0;
+                    
+                    if (counter != byteArray.Length) // Only add new line if we aren't on the last byte 
+                    {
+                        sb.Append("\"" + Environment.NewLine + VariableName + " += b\"");
+                    }
                 }
             }
             sb.Append("\"");
-            if (counter % Properties.Settings.Default.SplitLine == 0) // Remove the new line stuff on last byte
-            {
-                sb.Remove(sb.Length - 10, 10);
-            }
             return sb.ToString();
         }
     }
