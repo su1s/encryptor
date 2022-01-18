@@ -192,9 +192,9 @@ namespace Encryptor
             // 
             // btnGenerateXOR
             // 
-            this.btnGenerateXOR.Location = new System.Drawing.Point(210, 42);
+            this.btnGenerateXOR.Location = new System.Drawing.Point(216, 42);
             this.btnGenerateXOR.Name = "btnGenerateXOR";
-            this.btnGenerateXOR.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerateXOR.Size = new System.Drawing.Size(69, 25);
             this.btnGenerateXOR.TabIndex = 3;
             this.btnGenerateXOR.Text = "Generate";
             this.btnGenerateXOR.UseVisualStyleBackColor = true;
@@ -263,9 +263,9 @@ namespace Encryptor
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(209, 71);
+            this.btnGenerate.Location = new System.Drawing.Point(215, 71);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerate.Size = new System.Drawing.Size(69, 25);
             this.btnGenerate.TabIndex = 2;
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -590,9 +590,9 @@ namespace Encryptor
             // 
             // btnGenerateInsertionString
             // 
-            this.btnGenerateInsertionString.Location = new System.Drawing.Point(203, 66);
+            this.btnGenerateInsertionString.Location = new System.Drawing.Point(209, 67);
             this.btnGenerateInsertionString.Name = "btnGenerateInsertionString";
-            this.btnGenerateInsertionString.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerateInsertionString.Size = new System.Drawing.Size(69, 25);
             this.btnGenerateInsertionString.TabIndex = 2;
             this.btnGenerateInsertionString.Text = "Generate";
             this.btnGenerateInsertionString.UseVisualStyleBackColor = true;
@@ -645,20 +645,20 @@ namespace Encryptor
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(259, 213);
+            this.btnCancel.Location = new System.Drawing.Point(251, 228);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(56, 19);
+            this.btnCancel.Size = new System.Drawing.Size(69, 25);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(198, 213);
+            this.btnOK.Location = new System.Drawing.Point(178, 228);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(56, 19);
+            this.btnOK.Size = new System.Drawing.Size(69, 25);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -668,7 +668,7 @@ namespace Encryptor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 239);
+            this.ClientSize = new System.Drawing.Size(325, 257);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
