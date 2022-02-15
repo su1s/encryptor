@@ -66,7 +66,7 @@ namespace Encryptor
                     byte[] ivBase64 = Convert.FromBase64String(Properties.Settings.Default.AES_IV);
                     Array.Copy(ivBase64, 0, iv, 0, ivBase64.Length);
                     byte[] key = new byte[32];
-                    byte[] keyBase64 = Convert.FromBase64String(Properties.Settings.Default.AES_IV);
+                    byte[] keyBase64 = Convert.FromBase64String(Properties.Settings.Default.AES_Key);
                     Array.Copy(keyBase64, 0, key, 0, keyBase64.Length);
                     EncodedShellcode = Functions.EncryptAES(RawShellcode, key, iv);
                     Encoding_Method = "AES";
@@ -199,7 +199,7 @@ namespace Encryptor
                     byte[] ivBase64 = System.Convert.FromBase64String(Properties.Settings.Default.AES_IV);
                     Array.Copy(ivBase64, 0, iv, 0, ivBase64.Length);
                     byte[] key = new byte[32];
-                    byte[] keyBase64 = System.Convert.FromBase64String(Properties.Settings.Default.AES_IV);
+                    byte[] keyBase64 = System.Convert.FromBase64String(Properties.Settings.Default.AES_Key);
                     Array.Copy(keyBase64, 0, key, 0, keyBase64.Length);
                     EncodedShellcode = Functions.DecryptAES(TempShellcode, key, iv);
                     Encoding_Method = "AES";
@@ -348,6 +348,7 @@ namespace Encryptor
                         // Put this back 
                         Properties.Settings.Default.SplitLine = OldSplitLines;
                         Properties.Settings.Default.Save();
+                        MessageBox.Show("Files Exported", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
